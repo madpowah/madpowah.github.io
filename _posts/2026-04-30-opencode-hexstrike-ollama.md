@@ -33,7 +33,7 @@ volatility3 foremost steghide exiftool
 
 Ajouter donc d'abord les outils que vous utilisez ou qui vous semblent pertinents pour ce que vous souhaitez faire puis installer hexstrike via les commandes suivantes :
 
-```bash
+```
 # 1. Clone the repository
 git clone https://github.com/0x4m4/hexstrike-ai.git
 cd hexstrike-ai
@@ -45,7 +45,7 @@ source hexstrike-env/bin/activate  # Linux/Mac
 
 # 3. Install Python dependencies
 pip3 install -r requirements.txt
-{% endhighlight %}
+
 ```
 
 Ma VM est configurée en NAT donc il faut faire une redirection de port dans la conf Virtualbox de la VM pour rendre le port 8888 (hexstrike server) accessible depuis le WSL du host.
@@ -57,13 +57,6 @@ Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit number
 
 Jekyll also offers powerful support for code snippets:
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
 
 Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
 
