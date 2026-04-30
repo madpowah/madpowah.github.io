@@ -22,7 +22,7 @@ title: cloud's Blog
 email: cloud@madpowah.org
 description: Security blog
 domain : madpowah.github.io
-baseurl: "/" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://madpowah.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  madpowah
 
