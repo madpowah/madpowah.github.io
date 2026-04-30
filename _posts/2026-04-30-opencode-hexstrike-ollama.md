@@ -74,7 +74,7 @@ Les commandes pour augmenter le context depuis le Powershell
 PS> ollama run qwen3.5:9b
 >>> /set parameter num_ctx 100000
 Set parameter 'num_ctx' to '100000'
->>> /save qwen3:8b-16k
+>>> /save qwen3:8b-100k
 Created new model 'qwen3.5:9b-100k'
 >>> /bye
 ```
