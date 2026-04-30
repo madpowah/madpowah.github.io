@@ -27,7 +27,7 @@ url: "https://madpowah.github.io" # the base hostname & protocol for your site, 
 github_username:  madpowah
 
 # Build settings
-remote_theme: pages-themes/hacker@v0.2.0
+theme: jekyll-theme-hacker
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
