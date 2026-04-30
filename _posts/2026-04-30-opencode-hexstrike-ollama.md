@@ -4,6 +4,7 @@ title:  "Opencode / Hextrike / Ollama"
 date:   2026-04-30 22:54:36 +0200
 author: cloud
 categories: security ai
+tags: security ai
 permalink: /2026/04/30/opencode-hexstrike-ollama.html
 ---
 Un article pour détailler la mise en oeuvre d'une solution de pentest via IA en full local avec le combo `Opencode / Hextrike / Ollama`.
@@ -14,7 +15,9 @@ L'architecture que j'utilise est la suivante :
 [Host W11 + WSL + Ollama + MCP server] <--> [VM Kali + Hexstrike + pentest tools]
 ```
 
+
 ***
+
 
 # Hexstrike Server
 [Hextrike][hexstrike-github] est un framework IA orienté pentest donnant les capacités à un LLM d'exécuter les outils de pentests nécessaires à un attaquant. J'ai choisi de l'installer dans une VM Kali qui possède uen bonne partie de ces outils et permet d'en ajouter facilement. Il est composé d'un serveur accessible depuis une API et d'un MCP qui va permettre de faire le lien entre les commandes souhaitées par le LLM et le serveur hexstrike qui va les exécuter.
@@ -59,7 +62,9 @@ Ma VM est configurée en NAT donc il faut faire une redirection de port dans la 
 
 ![redirection port](/assets/images/2026-04-30-redir-port.jpg)
 
+
 ***
+
 
 # Ollama
 Ollama est installé sur le host W11 et fonctionne en utilisant ma carte graphique. J'ai constaté des soucis avec beaucoup de modèles pour détecter les tools. cela serait dû à la taille du context configuré à 4096. Du coup j'ai trouvé ce workaround qui fonctionne pour ma part et qui consiste à augmenter la taille de ce contexte. Perso j'utilise Qwen3.5 en 9b ou 27b selon mon humeur. C'est le modèle local que je trouve le plus pertinent. J'ai trouvé également deepseek v3.2 via Ollama cloud très efficace également.
@@ -73,6 +78,10 @@ Set parameter 'num_ctx' to '100000'
 Created new model 'qwen3.5:9b-100k'
 >>> /bye
 ```
+
+
+***
+
 
 # Hexstrike MCP
 On va maintenant installer le MCP hexstrike sur le Host WSL. C'est lui qui sera appelé via Opencode pour lancer des commandes via le Hexstrike de la Kali.
@@ -91,7 +100,9 @@ source hexstrike-env/bin/activate  #
 pip3 install mcp requests
 ```
 
+
 ***
+
 
 # Opencode
 Il reste maintenant à installer Opencode sur le WSL. Rien de plus simple :
@@ -137,7 +148,7 @@ On va ensuite configurer [Opencode][opencode] pour qu'il utilise le MCP d'Hexstr
 }
 ```
 
-Et voilà, i ln'y a plus qu'à lancer opencode en tapant opencode dans le WSL et si tout va bien vous devriez voir dans Opencode MCP Hexstrike-ai Connected et la console du serveur Hexstrike sur la Kali devrait également s'activer.
+Et voilà, il n'y a plus qu'à lancer opencode en tapant opencode dans le WSL et si tout va bien vous devriez voir dans Opencode `MCP Hexstrike-ai Connected` et la console du serveur Hexstrike sur la Kali devrait également s'activer.
 
 Il ne reste plus qu'à discuter via Opencode et lui indiquer votre cible et ce que vous souhaitez faire.
 
