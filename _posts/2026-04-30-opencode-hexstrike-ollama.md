@@ -2,15 +2,22 @@
 layout: post
 title:  "Opencode / Hextrike / Ollama"
 date:   2026-04-30 22:54:36 +0200
+author: cloud
 categories: security ai
 permalink: /2026/04/30/opencode-hexstrike-ollama.html
 ---
 Un article pour détailler la mise en oeuvre d'une solution de pentest via IA en full local avec le combo `Opencode / Hextrike / Ollama`.
 
+# Architecture
 L'architecture que j'utilise est la suivante :
+```
 [Host W11 + WSL + Ollama + MCP server] <--> [VM Kali + Hexstrike + pentest tools]
+```
 
-[Hextrike][hexstrike-github] est un framework IA oriennté pentest donnant les capacités à un LLM d'exécuter les outils de pentests nécessaires à un attaquant. J'ai choisi de l'installer dans une VM Kali qui possède uen bonne partie de ces outils et permet d'en ajouter facilement. 
+***
+
+# Hexstrike Server
+[Hextrike][hexstrike-github] est un framework IA orienté pentest donnant les capacités à un LLM d'exécuter les outils de pentests nécessaires à un attaquant. J'ai choisi de l'installer dans une VM Kali qui possède uen bonne partie de ces outils et permet d'en ajouter facilement. Il est composé d'un serveur accessible depuis une API et d'un MCP qui va permettre de faire le lien entre les commandes souhaitées par le LLM et le serveur hexstrike qui va les exécuter.
 La liste des outils exécutables par hexstrike sont les suivants (src hexstrike github):
 
 ```
@@ -31,36 +38,112 @@ gdb radare2 binwalk ghidra checksec strings objdump
 volatility3 foremost steghide exiftool
 ```
 
-Ajouter donc d'abord les outils que vous utilisez ou qui vous semblent pertinents pour ce que vous souhaitez faire puis installer hexstrike via les commandes suivantes :
+Ajouter donc d'abord les outils que vous utilisez ou qui vous semblent pertinents pour ce que vous souhaitez faire puis installer et exécuter hexstrike via les commandes suivantes :
 
-```
+```bash
 # 1. Clone the repository
 git clone https://github.com/0x4m4/hexstrike-ai.git
 cd hexstrike-ai
 
 # 2. Create virtual environment
 python3 -m venv hexstrike-env
-source hexstrike-env/bin/activate  # Linux/Mac
-# hexstrike-env\Scripts\activate   # Windows
+source hexstrike-env/bin/activate 
 
 # 3. Install Python dependencies
 pip3 install -r requirements.txt
+python3 hexstrike_server.py
 
 ```
 
 Ma VM est configurée en NAT donc il faut faire une redirection de port dans la conf Virtualbox de la VM pour rendre le port 8888 (hexstrike server) accessible depuis le WSL du host.
+
 ![redirection port](/assets/images/2026-04-30-redir-port.jpg)
 
-`YEAR-MONTH-DAY-title.MARKUP`
+***
 
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+# Ollama
+Ollama est installé sur le host W11 et fonctionne en utilisant ma carte graphique. J'ai constaté des soucis avec beaucoup de modèles pour détecter les tools. cela serait dû à la taille du context configuré à 4096. Du coup j'ai trouvé ce workaround qui fonctionne pour ma part et qui consiste à augmenter la taille de ce contexte. Perso j'utilise Qwen3.5 en 9b ou 27b selon mon humeur. C'est le modèle local que je trouve le plus pertinent. J'ai trouvé également deepseek v3.2 via Ollama cloud très efficace également.
+Les commandes pour augmenter le context depuis le Powershell
 
-Jekyll also offers powerful support for code snippets:
+```bash
+PS> ollama run qwen3.5:9b
+>>> /set parameter num_ctx 100000
+Set parameter 'num_ctx' to '100000'
+>>> /save qwen3:8b-16k
+Created new model 'qwen3.5:9b-100k'
+>>> /bye
+```
 
+# Hexstrike MCP
+On va maintenant installer le MCP hexstrike sur le Host WSL. C'est lui qui sera appelé via Opencode pour lancer des commandes via le Hexstrike de la Kali.
+On tape donc sur le WSL.
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+```bash
+# 1. Clone the repository
+git clone https://github.com/0x4m4/hexstrike-ai.git
+cd hexstrike-ai
+
+# 2. Create virtual environment
+python3 -m venv hexstrike-env
+source hexstrike-env/bin/activate  #
+
+# 3. Install Python dependencies
+pip3 install mcp requests
+```
+
+***
+
+# Opencode
+Il reste maintenant à installer Opencode sur le WSL. Rien de plus simple :
+
+```bash
+curl -fsSL https://opencode.ai/install | bash
+```
+
+On va ensuite configurer [Opencode][opencode] pour qu'il utilise le MCP d'Hexstrike et qu'il propose les modèles Ollama que l'on souhaite. Pour trouver l'IP pour pouvoir contacter ollama et hexstrike, le plus simple est de taper `route -n` depuis un shell du WSL et de regarder l'IP de la default gateway.
+
+```json
+# Fichier: ~/.config/opencode/config.json
+
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "hexstrike-ai": {
+      "type": "local",
+      "command" : ["/path/to/hexstrike-ai/hexstrike-env/bin/python3", "/path/to/hexstrike-ai/hexstrike_mcp.py", "--server", "http://<IP_DEFAULT_GW_WSL>:8888"],
+      "enabled": true
+    }
+  },
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://<IP_DEFAULT_GW_WSL>:11434/v1"
+
+      },
+      "models": {
+        "qwen3.5:27b-16k": {
+                "name": "Qwen3.5-27b",
+                "tools": true
+        },
+        "qwen3.5:9b-100k": {
+                "name": "Qwen3.5-9b-100k",
+                "tools": true
+        },
+      }
+    }
+  }
+}
+```
+
+Et voilà, i ln'y a plus qu'à lancer opencode en tapant opencode dans le WSL et si tout va bien vous devriez voir dans Opencode MCP Hexstrike-ai Connected et la console du serveur Hexstrike sur la Kali devrait également s'activer.
+
+Il ne reste plus qu'à discuter via Opencode et lui indiquer votre cible et ce que vous souhaitez faire.
+
+Have fun.
 
 [hexstrike-github]: https://github.com/0x4m4/hexstrike-ai
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+[opencode]:   https://opencode.ai/
+
  
