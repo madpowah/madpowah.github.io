@@ -7,7 +7,7 @@ categories: security ai
 tags: security ai
 permalink: /2026/04/30/opencode-hexstrike-ollama.html
 ---
-Un article pour détailler la mise en oeuvre d'une solution de pentest via IA en full local avec le combo `Opencode / Hextrike / Ollama`.
+Un article pour détailler la mise en oeuvre d'une solution de pentest via IA en full local avec le combo `Opencode / Hexstrike / Ollama`.
 
 # Architecture
 L'architecture que j'utilise est la suivante :
@@ -20,7 +20,7 @@ L'architecture que j'utilise est la suivante :
 
 
 # Hexstrike Server
-[Hextrike][hexstrike-github] est un framework IA orienté pentest donnant les capacités à un LLM d'exécuter les outils de pentests nécessaires à un attaquant. J'ai choisi de l'installer dans une VM Kali qui possède uen bonne partie de ces outils et permet d'en ajouter facilement. Il est composé d'un serveur accessible depuis une API et d'un MCP qui va permettre de faire le lien entre les commandes souhaitées par le LLM et le serveur hexstrike qui va les exécuter.
+[Hexstrike][hexstrike-github] est un framework IA orienté pentest donnant les capacités à un LLM d'exécuter les outils de pentests nécessaires à un attaquant. J'ai choisi de l'installer dans une VM Kali qui possède uen bonne partie de ces outils et permet d'en ajouter facilement. Il est composé d'un serveur accessible depuis une API et d'un MCP qui va permettre de faire le lien entre les commandes souhaitées par le LLM et le serveur hexstrike qui va les exécuter.
 La liste des outils exécutables par hexstrike sont les suivants (src hexstrike github):
 
 ```
