@@ -41,7 +41,7 @@ gdb radare2 binwalk ghidra checksec strings objdump
 volatility3 foremost steghide exiftool
 ```
 
-Ajouter donc d'abord les outils que vous utilisez ou qui vous semblent pertinents pour ce que vous souhaitez faire puis installer et exécuter hexstrike via les commandes suivantes :
+Ajoutez donc d'abord les outils que vous utilisez ou qui vous semblent pertinents pour ce que vous souhaitez faire puis installer et exécuter hexstrike via les commandes suivantes :
 
 ```bash
 # 1. Clone the repository
