@@ -13,7 +13,7 @@ L'architecture que j'utilise est la suivante :
 [Hextrike][hexstrike-github] est un framework IA oriennté pentest donnant les capacités à un LLM d'exécuter les outils de pentests nécessaires à un attaquant. J'ai choisi de l'installer dans une VM Kali qui possède uen bonne partie de ces outils et permet d'en ajouter facilement. 
 La liste des outils exécutables par hexstrike sont les suivants (src hexstrike github):
 
-{% highlight %}
+```
 # Network & Reconnaissance
 nmap masscan rustscan amass subfinder nuclei fierce dnsenum
 autorecon theharvester responder netexec enum4linux-ng
@@ -29,11 +29,11 @@ evil-winrm hash-identifier ophcrack
 # Binary Analysis & Reverse Engineering
 gdb radare2 binwalk ghidra checksec strings objdump
 volatility3 foremost steghide exiftool
-{% endhighlight %}
+```
 
 Ajouter donc d'abord les outils que vous utilisez ou qui vous semblent pertinents pour ce que vous souhaitez faire puis installer hexstrike via les commandes suivantes :
 
-{% highlight bash %}
+```bash
 # 1. Clone the repository
 git clone https://github.com/0x4m4/hexstrike-ai.git
 cd hexstrike-ai
@@ -46,6 +46,7 @@ source hexstrike-env/bin/activate  # Linux/Mac
 # 3. Install Python dependencies
 pip3 install -r requirements.txt
 {% endhighlight %}
+```
 
 Ma VM est configurée en NAT donc il faut faire une redirection de port dans la conf Virtualbox de la VM pour rendre le port 8888 (hexstrike server) accessible depuis le WSL du host.
 ![redirection port](/assets/images/2026-04-30-redir-port.jpg)
