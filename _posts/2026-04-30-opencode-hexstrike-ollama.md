@@ -3,6 +3,7 @@ layout: post
 title:  "Opencode / Hextrike / Ollama"
 date:   2026-04-30 22:54:36 +0200
 categories: security ai
+permalink: /2026/04/30/opencode-hexstrike-ollama.html
 ---
 Un article pour détailler la mise en oeuvre d'une solution de pentest via IA en full local avec le combo `Opencode / Hextrike / Ollama`.
 
