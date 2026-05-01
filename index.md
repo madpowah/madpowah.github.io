@@ -10,6 +10,8 @@ title: cloud's Blog
 
 [copyfail]: https://madpowah.github.io/2026/05/01/copy-fail-exploit.html
 
+---
+
 # Opencode / Hextrike / Ollama
 30/04/2026 - Un article pour détailler la mise en oeuvre d'une solution de pentest via IA en full local avec le combo `Opencode / Hextrike / Ollama`. [Lire][hexstrike-opencode]
 
