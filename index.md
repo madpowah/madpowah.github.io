@@ -5,6 +5,13 @@
 layout: default
 title: cloud's Blog
 ---
+# Dirty Frag : LPE universel Linux - CVE-2026-43284 / CVE-2026-43500
+09/05/2026 - **Dirty Frag** est une classe de vulnérabilités qui chaîne deux failles d'écriture dans le cache de pages Linux (xfrm-ESP + RxRPC) pour obtenir root sur toutes les distributions majeures. [Lire][dirtyfrag]
+
+[dirtyfrag]: https://madpowah.github.io/2026/05/09/dirtyfrag-cve-2026-43284.html
+
+---
+
 # CVE-2026-23918 : Double-Free dans le module HTTP/2 d'Apache HTTPD
 07/05/2026 - **CVE-2026-23918** est une vulnérabilité de type double-free dans le module HTTP/2 d'Apache HTTP Server 2.4.66, permettant un DoS fiable et une RCE théorique. [Lire][cve-2026-23918]
 
