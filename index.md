@@ -1,10 +1,14 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
 title: cloud's Blog
 ---
+# Opencode Agent Manager
+14/05/2026 - Gérez vos agents et skills OpenCode depuis une interface web : dashboard, CRUD agents, skills, import/export, mode projet. [Lire][oam]
+
+[oam]: https://madpowah.github.io/2026/05/14/opencode-agent-manager.html
+
+---
+
 # Dirty Frag : LPE universel Linux - CVE-2026-43284 / CVE-2026-43500
 09/05/2026 - **Dirty Frag** est une classe de vulnérabilités qui chaîne deux failles d'écriture dans le cache de pages Linux (xfrm-ESP + RxRPC) pour obtenir root sur toutes les distributions majeures. [Lire][dirtyfrag]
 
