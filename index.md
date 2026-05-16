@@ -2,6 +2,13 @@
 layout: default
 title: cloud's Blog
 ---
+# CVE-2026-46333 (ssh-keysign-pwn) : Vol de clés SSH hôte via le noyau Linux
+16/05/2026 - **CVE-2026-46333** est une vulnérabilité du noyau Linux permettant à tout utilisateur local non privilégié de voler les clés privées SSH de l'hôte et `/etc/shadow` via un contournement `mm-NULL` dans `__ptrace_may_access()`. [Lire][ssh-keysign-pwn]
+
+[ssh-keysign-pwn]: https://madpowah.github.io/2026/05/16/cve-2026-46333-ssh-keysign-pwn.html
+
+---
+
 # Opencode Agent Manager
 14/05/2026 - Gérez vos agents et skills OpenCode depuis une interface web : dashboard, CRUD agents, skills, import/export, mode projet. [Lire][oam]
 
