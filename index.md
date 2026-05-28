@@ -2,6 +2,13 @@
 layout: default
 title: cloud's Blog
 ---
+# CVE-2026-45585 (YellowKey) : Bypass BitLocker Windows par Transaction NTFS
+28/05/2026 - **CVE-2026-45585 (YellowKey)** est un bypass de BitLocker Windows permettant à un attaquant avec accès physique de contourner le chiffrement et d'accéder aux données sans mot de passe, clé de récupération, ni outil spécialisé, en abusant de Transactional NTFS (TxF) et du boot WinRE. [Lire][yellowkey]
+
+[yellowkey]: https://madpowah.github.io/2026/05/28/cve-2026-45585-yellowkey-bitlocker-bypass.html
+
+---
+
 # CVE-2026-46333 (ssh-keysign-pwn) : Vol de clés SSH hôte via le noyau Linux
 16/05/2026 - **CVE-2026-46333** est une vulnérabilité du noyau Linux permettant à tout utilisateur local non privilégié de voler les clés privées SSH de l'hôte et `/etc/shadow` via un contournement `mm-NULL` dans `__ptrace_may_access()`. [Lire][ssh-keysign-pwn]
 
