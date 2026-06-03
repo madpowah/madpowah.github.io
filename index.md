@@ -2,6 +2,13 @@
 layout: default
 title: cloud's Blog
 ---
+# Navigateur Tesla : contournement des restrictions vidéo en mode conduite
+03/06/2026 - Contournement des restrictions vidéo du navigateur Tesla en mode conduite via MPEG1 + JSMpeg (WebGL) et WebSocket binaire — de 15 FPS/3 Mbps à 30 FPS/0.8 Mbps. Exploration technique des API bloquées, des pistes échouées et de la solution finale. [Lire][tesla-video]
+
+[tesla-video]: https://madpowah.github.io/2026/06/03/tesla-browser-video-bypass.html
+
+---
+
 # CVE-2026-45585 (YellowKey) : Bypass BitLocker Windows par Transaction NTFS
 28/05/2026 - **CVE-2026-45585 (YellowKey)** est un bypass de BitLocker Windows permettant à un attaquant avec accès physique de contourner le chiffrement et d'accéder aux données sans mot de passe, clé de récupération, ni outil spécialisé, en abusant de Transactional NTFS (TxF) et du boot WinRE. [Lire][yellowkey]
 
