@@ -16,7 +16,7 @@ Le projet est disponible sur [GitHub — tesla-video-drive](https://github.com/m
 
 ---
 
-## TL;DR
+## Résumé
 
 | Champ | Valeur |
 |---|---|
