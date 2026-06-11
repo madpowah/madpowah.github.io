@@ -2,6 +2,13 @@
 layout: default
 title: cloud's Blog
 ---
+# CVE-2026-45257 (BUMSRAKETE) : Écriture dans le cache de pages FreeBSD via sendfile + kTLS
+11/06/2026 - **CVE-2026-45257 (BUMSRAKETE)** est une vulnérabilité d'élévation de privilèges locaux dans le noyau FreeBSD découverte par le chercheur « Bumsrakete ». En enchaînant `sendfile(2)`, kTLS RX et le decrypt AES-GCM logiciel, tout utilisateur non privilégié peut écrire des données arbitraires dans le cache de pages pour obtenir un shell root en ~1,5 secondes. Affecte FreeBSD 13.0 à 15.0. [Lire][bumsrakete]
+
+[bumsrakete]: https://madpowah.github.io/2026/06/11/bumsrakete-cve-2026-45257.html
+
+---
+
 # Navigateur Tesla : contournement des restrictions vidéo en mode conduite
 03/06/2026 - Contournement des restrictions vidéo du navigateur Tesla en mode conduite via MPEG1 + JSMpeg (WebGL) et WebSocket binaire — de 15 FPS/3 Mbps à 30 FPS/0.8 Mbps. Exploration technique des API bloquées, des pistes échouées et de la solution finale. [Lire][tesla-video]
 
